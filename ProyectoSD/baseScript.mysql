@@ -1,0 +1,16 @@
+USE BaseGifs;
+
+CREATE TABLE Gifs (
+	id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	nombreGif varchar(50) NOT NULL,
+	contador int NOT NULL
+);
+
+INSERT INTO Gifs (nombreGif, contador) 
+VALUES ('el_bailarin_del_tiempo', 50);
+
+INSERT INTO Gifs (nombreGif, contador) 
+VALUES ('todo_por _la_victoria', 45);
+
+INSERT INTO Gifs (nombreGif, contador) 
+VALUES ('el_trio_legendario', 65);
