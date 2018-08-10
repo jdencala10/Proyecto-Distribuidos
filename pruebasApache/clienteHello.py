@@ -25,6 +25,10 @@ def main():
     saludoGerudo=client.saludar()
     print(saludoGerudo)
 
+    topCiudades = client.TopEstrellas()
+    print(topCiudades)
+
+
     transport.close()
 
 if __name__ == '__main__':

@@ -26,6 +26,7 @@ if len(sys.argv) <= 1 or sys.argv[1] == '--help':
     print('Functions:')
     print('  string saludar()')
     print('  string SaludoConNombre(string nombre)')
+    print('   TopEstrellas()')
     print('')
     sys.exit(0)
 
@@ -116,6 +117,12 @@ elif cmd == 'SaludoConNombre':
         print('SaludoConNombre requires 1 args')
         sys.exit(1)
     pp.pprint(client.SaludoConNombre(args[0],))
+
+elif cmd == 'TopEstrellas':
+    if len(args) != 0:
+        print('TopEstrellas requires 0 args')
+        sys.exit(1)
+    pp.pprint(client.TopEstrellas())
 
 else:
     print('Unrecognized method %s' % cmd)
