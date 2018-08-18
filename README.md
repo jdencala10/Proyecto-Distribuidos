@@ -3,5 +3,5 @@ Implementación de un sistema web, con una arquitectura de microservicios y  una
 
 ## Herramientas utilizadas
 1. Lenguaje de programacion: Python
-2. Framework Web: Django
+2. NODE.js
 3.basa de datos:mysql
