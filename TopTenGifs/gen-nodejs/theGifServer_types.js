@@ -13,15 +13,15 @@ var Q = thrift.Q;
 var ttypes = module.exports = {};
 var Gif = module.exports.Gif = function(args) {
   this.id = null;
-  this.urlGif = null;
+  this.url = null;
   this.contador = null;
   this.descripcion = null;
   if (args) {
     if (args.id !== undefined && args.id !== null) {
       this.id = args.id;
     }
-    if (args.urlGif !== undefined && args.urlGif !== null) {
-      this.urlGif = args.urlGif;
+    if (args.url !== undefined && args.url !== null) {
+      this.url = args.url;
     }
     if (args.contador !== undefined && args.contador !== null) {
       this.contador = args.contador;
@@ -54,7 +54,7 @@ Gif.prototype.read = function(input) {
       break;
       case 2:
       if (ftype == Thrift.Type.STRING) {
-        this.urlGif = input.readString();
+        this.url = input.readString();
       } else {
         input.skip(ftype);
       }
@@ -89,9 +89,9 @@ Gif.prototype.write = function(output) {
     output.writeI32(this.id);
     output.writeFieldEnd();
   }
-  if (this.urlGif !== null && this.urlGif !== undefined) {
-    output.writeFieldBegin('urlGif', Thrift.Type.STRING, 2);
-    output.writeString(this.urlGif);
+  if (this.url !== null && this.url !== undefined) {
+    output.writeFieldBegin('url', Thrift.Type.STRING, 2);
+    output.writeString(this.url);
     output.writeFieldEnd();
   }
   if (this.contador !== null && this.contador !== undefined) {

@@ -117,6 +117,110 @@ losMejoresGifs_top10_result.prototype.write = function(output) {
   return;
 };
 
+var losMejoresGifs_top10ConCache_args = function(args) {
+};
+losMejoresGifs_top10ConCache_args.prototype = {};
+losMejoresGifs_top10ConCache_args.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    input.skip(ftype);
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+losMejoresGifs_top10ConCache_args.prototype.write = function(output) {
+  output.writeStructBegin('losMejoresGifs_top10ConCache_args');
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+var losMejoresGifs_top10ConCache_result = function(args) {
+  this.success = null;
+  if (args) {
+    if (args.success !== undefined && args.success !== null) {
+      this.success = Thrift.copyList(args.success, [ttypes.Gif]);
+    }
+  }
+};
+losMejoresGifs_top10ConCache_result.prototype = {};
+losMejoresGifs_top10ConCache_result.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 0:
+      if (ftype == Thrift.Type.LIST) {
+        var _size8 = 0;
+        var _rtmp312;
+        this.success = [];
+        var _etype11 = 0;
+        _rtmp312 = input.readListBegin();
+        _etype11 = _rtmp312.etype;
+        _size8 = _rtmp312.size;
+        for (var _i13 = 0; _i13 < _size8; ++_i13)
+        {
+          var elem14 = null;
+          elem14 = new ttypes.Gif();
+          elem14.read(input);
+          this.success.push(elem14);
+        }
+        input.readListEnd();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 0:
+        input.skip(ftype);
+        break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+losMejoresGifs_top10ConCache_result.prototype.write = function(output) {
+  output.writeStructBegin('losMejoresGifs_top10ConCache_result');
+  if (this.success !== null && this.success !== undefined) {
+    output.writeFieldBegin('success', Thrift.Type.LIST, 0);
+    output.writeListBegin(Thrift.Type.STRUCT, this.success.length);
+    for (var iter15 in this.success)
+    {
+      if (this.success.hasOwnProperty(iter15))
+      {
+        iter15 = this.success[iter15];
+        iter15.write(output);
+      }
+    }
+    output.writeListEnd();
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
 var losMejoresGifs_yoTeInvoco_args = function(args) {
   this.nombreGif = null;
   if (args) {
@@ -279,6 +383,52 @@ losMejoresGifsClient.prototype.recv_top10 = function(input,mtype,rseqid) {
   }
   return callback('top10 failed: unknown result');
 };
+losMejoresGifsClient.prototype.top10ConCache = function(callback) {
+  this._seqid = this.new_seqid();
+  if (callback === undefined) {
+    var _defer = Q.defer();
+    this._reqs[this.seqid()] = function(error, result) {
+      if (error) {
+        _defer.reject(error);
+      } else {
+        _defer.resolve(result);
+      }
+    };
+    this.send_top10ConCache();
+    return _defer.promise;
+  } else {
+    this._reqs[this.seqid()] = callback;
+    this.send_top10ConCache();
+  }
+};
+
+losMejoresGifsClient.prototype.send_top10ConCache = function() {
+  var output = new this.pClass(this.output);
+  output.writeMessageBegin('top10ConCache', Thrift.MessageType.CALL, this.seqid());
+  var args = new losMejoresGifs_top10ConCache_args();
+  args.write(output);
+  output.writeMessageEnd();
+  return this.output.flush();
+};
+
+losMejoresGifsClient.prototype.recv_top10ConCache = function(input,mtype,rseqid) {
+  var callback = this._reqs[rseqid] || function() {};
+  delete this._reqs[rseqid];
+  if (mtype == Thrift.MessageType.EXCEPTION) {
+    var x = new Thrift.TApplicationException();
+    x.read(input);
+    input.readMessageEnd();
+    return callback(x);
+  }
+  var result = new losMejoresGifs_top10ConCache_result();
+  result.read(input);
+  input.readMessageEnd();
+
+  if (null !== result.success) {
+    return callback(null, result.success);
+  }
+  return callback('top10ConCache failed: unknown result');
+};
 losMejoresGifsClient.prototype.yoTeInvoco = function(nombreGif, callback) {
   this._seqid = this.new_seqid();
   if (callback === undefined) {
@@ -376,6 +526,42 @@ losMejoresGifsProcessor.prototype.process_top10 = function(seqid, input, output)
       } else {
         result_obj = new Thrift.TApplicationException(Thrift.TApplicationExceptionType.UNKNOWN, err.message);
         output.writeMessageBegin("top10", Thrift.MessageType.EXCEPTION, seqid);
+      }
+      result_obj.write(output);
+      output.writeMessageEnd();
+      output.flush();
+    });
+  }
+};
+losMejoresGifsProcessor.prototype.process_top10ConCache = function(seqid, input, output) {
+  var args = new losMejoresGifs_top10ConCache_args();
+  args.read(input);
+  input.readMessageEnd();
+  if (this._handler.top10ConCache.length === 0) {
+    Q.fcall(this._handler.top10ConCache.bind(this._handler))
+      .then(function(result) {
+        var result_obj = new losMejoresGifs_top10ConCache_result({success: result});
+        output.writeMessageBegin("top10ConCache", Thrift.MessageType.REPLY, seqid);
+        result_obj.write(output);
+        output.writeMessageEnd();
+        output.flush();
+      }, function (err) {
+        var result;
+        result = new Thrift.TApplicationException(Thrift.TApplicationExceptionType.UNKNOWN, err.message);
+        output.writeMessageBegin("top10ConCache", Thrift.MessageType.EXCEPTION, seqid);
+        result.write(output);
+        output.writeMessageEnd();
+        output.flush();
+      });
+  } else {
+    this._handler.top10ConCache(function (err, result) {
+      var result_obj;
+      if ((err === null || typeof err === 'undefined')) {
+        result_obj = new losMejoresGifs_top10ConCache_result((err !== null || typeof err === 'undefined') ? err : {success: result});
+        output.writeMessageBegin("top10ConCache", Thrift.MessageType.REPLY, seqid);
+      } else {
+        result_obj = new Thrift.TApplicationException(Thrift.TApplicationExceptionType.UNKNOWN, err.message);
+        output.writeMessageBegin("top10ConCache", Thrift.MessageType.EXCEPTION, seqid);
       }
       result_obj.write(output);
       output.writeMessageEnd();

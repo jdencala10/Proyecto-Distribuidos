@@ -20,15 +20,15 @@ class Gif(object):
     """
     Attributes:
      - id
-     - urlGif
+     - url
      - contador
      - descripcion
     """
 
 
-    def __init__(self, id=None, urlGif=None, contador=None, descripcion=None,):
+    def __init__(self, id=None, url=None, contador=None, descripcion=None,):
         self.id = id
-        self.urlGif = urlGif
+        self.url = url
         self.contador = contador
         self.descripcion = descripcion
 
@@ -48,7 +48,7 @@ class Gif(object):
                     iprot.skip(ftype)
             elif fid == 2:
                 if ftype == TType.STRING:
-                    self.urlGif = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
+                    self.url = iprot.readString().decode('utf-8') if sys.version_info[0] == 2 else iprot.readString()
                 else:
                     iprot.skip(ftype)
             elif fid == 3:
@@ -75,9 +75,9 @@ class Gif(object):
             oprot.writeFieldBegin('id', TType.I32, 1)
             oprot.writeI32(self.id)
             oprot.writeFieldEnd()
-        if self.urlGif is not None:
-            oprot.writeFieldBegin('urlGif', TType.STRING, 2)
-            oprot.writeString(self.urlGif.encode('utf-8') if sys.version_info[0] == 2 else self.urlGif)
+        if self.url is not None:
+            oprot.writeFieldBegin('url', TType.STRING, 2)
+            oprot.writeString(self.url.encode('utf-8') if sys.version_info[0] == 2 else self.url)
             oprot.writeFieldEnd()
         if self.contador is not None:
             oprot.writeFieldBegin('contador', TType.I32, 3)
@@ -107,7 +107,7 @@ all_structs.append(Gif)
 Gif.thrift_spec = (
     None,  # 0
     (1, TType.I32, 'id', None, None, ),  # 1
-    (2, TType.STRING, 'urlGif', 'UTF8', None, ),  # 2
+    (2, TType.STRING, 'url', 'UTF8', None, ),  # 2
     (3, TType.I32, 'contador', None, None, ),  # 3
     (4, TType.STRING, 'descripcion', 'UTF8', None, ),  # 4
 )
