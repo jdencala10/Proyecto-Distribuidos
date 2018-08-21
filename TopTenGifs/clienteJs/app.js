@@ -10,7 +10,10 @@ const app = express()
 var transport = thrift.TBufferedTransport;
 var protocol = thrift.TBinaryProtocol;
 
-var  listaGifs;
+var listaGifs;
+var listaGifsConCache;
+
+
 
 var connection = thrift.createConnection("localhost", 9090, {
   transport : transport,
@@ -23,17 +26,40 @@ connection.on('error', function(err) {
 
 var cliente =  thrift.createClient(losGifs, connection);
 
+/*
 cliente.top10(function(err, response) {
-  console.log(response);
   listaGifs = response;
 });
 
-
+cliente.top10ConCache(function(err, response) {
+ listaGifs = response;
+});
+*/
 
 app.set('view engine','ejs');
 app.set('views',__dirname+'/views')
 
+
+//Pagina principal
 app.get('/', function(req, res){
-		res.render('index', { "listaGifs": listaGifs })
-		});
+
+  cliente.top10(function(err, response){
+    listaGifs = response;
+    res.render('index', {"listaGifs": listaGifs });
+  });
+
+});
+
+
+//Pagina secundaria (con cache)
+app.get('/1', function(err, res){
+
+  cliente.top10ConCache(function(err, response){
+    listaGifs = response;
+    res.render('index', {"listaGifs": listaGifs});
+  });
+
+});
+
+
 app.listen(3000, ()=>console.log('Node Js listening 3000'))
