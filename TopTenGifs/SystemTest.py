@@ -14,3 +14,7 @@ for y in  range(10):
 print(tiemposSinCache)
 print("-"*20)
 print(tiemposConCache)
+
+plt.figure()
+plt.boxplot(np.array(tiemposSinCache), 0, '')
+plt.show()

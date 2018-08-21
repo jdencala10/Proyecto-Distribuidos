@@ -26,22 +26,18 @@ connection.on('error', function(err) {
 
 var cliente =  thrift.createClient(losGifs, connection);
 
-/*
-cliente.top10(function(err, response) {
-  listaGifs = response;
-});
-
-cliente.top10ConCache(function(err, response) {
- listaGifs = response;
-});
-*/
 
 app.set('view engine','ejs');
 app.set('views',__dirname+'/views')
 
 
-//Pagina principal
 app.get('/', function(req, res){
+  res.render('menu');
+});
+
+
+//Pagina sin cache
+app.get('/sinCache', function(req, res){
 
   cliente.top10(function(err, response){
     listaGifs = response;
@@ -52,7 +48,7 @@ app.get('/', function(req, res){
 
 
 //Pagina secundaria (con cache)
-app.get('/1', function(err, res){
+app.get('/cache', function(err, res){
 
   cliente.top10ConCache(function(err, response){
     listaGifs = response;

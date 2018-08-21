@@ -3,10 +3,12 @@
 <title>Hi</title>
 </head>
 <body>
-<h1>Hello</h1>
-<hr >
 <% for(var j=0; j < listaGifs.length; j++ ){ %>
-	<p><img src=<%= listaGifs[j].url %>></p>
+	<p><img width="250" src=<%= listaGifs[j].url %>>
+		<br>
+		<%= listaGifs[j].descripcion %>
+		<hr>	
+</p>
 <% } %>
 
 
