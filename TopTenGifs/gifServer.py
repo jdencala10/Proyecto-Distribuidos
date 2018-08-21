@@ -4,7 +4,7 @@ import mysql.connector
 import redis
 import time
 sys.path.append('gen-py')
-sys.path.insert(0, glob.glob('/etc/apt/thrift-0.11.0/lib/py/build/lib*'[0]))
+sys.path.insert(0, glob.glob('../thrift-0.11.0/lib/py/build/lib*'[0]))
 from theGifServer import losMejoresGifs
 from theGifServer.ttypes import Gif
 
