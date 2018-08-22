@@ -1,15 +1,33 @@
 <html>
 <head>
-<title>Hi</title>
+        <title>PSD</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <meta charset="utf-8">
 </head>
 <body>
-<% for(var j=0; j < listaGifs.length; j++ ){ %>
-	<p><img width="250" src=<%= listaGifs[j].url %>>
-		<br>
-		<%= listaGifs[j].descripcion %>
-		<hr>	
-</p>
-<% } %>
+<div class="page-header">
+  <h1 style="margin-left: 10px"><%= titulo %></h1>
+</div>
+<div class="container">
+
+<div class="row">
+  <% for(var j=0; j < listaGifs.length; j++ ){ %>
+  <div class="col-sm-6 col-md-4 clearfix">
+    <div class="thumbnail" style="height:420px;">
+      <img width="400" height="400" src=<%= listaGifs[j].url %> alt="<%= listaGifs[j].descripcion %>">
+      <div class="caption">
+        <h3>Contador: <%= listaGifs[j].contador %></h3>
+        <p><%= listaGifs[j].descripcion %></p>
+      </div>
+    </div>
+  </div>
+  <% } %>
+</div>
+
+</div>
 
 
 </body>

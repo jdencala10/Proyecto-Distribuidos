@@ -37,11 +37,11 @@ app.get('/', function(req, res){
 
 
 //Pagina sin cache
-app.get('/sinCache', function(req, res){
+app.get('/mySql', function(req, res){
 
   cliente.top10(function(err, response){
     listaGifs = response;
-    res.render('index', {"listaGifs": listaGifs });
+    res.render('index', {"listaGifs": listaGifs, "titulo":"Usando solo MySQL" });
   });
 
 });
@@ -52,7 +52,7 @@ app.get('/cache', function(err, res){
 
   cliente.top10ConCache(function(err, response){
     listaGifs = response;
-    res.render('index', {"listaGifs": listaGifs});
+    res.render('index', {"listaGifs": listaGifs, "titulo":"Usando MySQL + Redis (cache)"});
   });
 
 });

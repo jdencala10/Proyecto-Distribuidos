@@ -48,7 +48,6 @@ class theGifServerHandler:
 		puntero=mydb.cursor()
 		puntero.execute("SELECT id, gifUrl, contador, Descripcion FROM Gifs ORDER BY contador DESC LIMIT 10;")
 		resultado = puntero.fetchall()
-		print(resultado)
 		lista_gifs = []
 		for x in resultado:
 			gif = Gif()
@@ -56,9 +55,7 @@ class theGifServerHandler:
 			gif.url = x[1]
 			gif.contador = x[2]
 			gif.descripcion = x[3]
-			print(gif)
 			lista_gifs.append(gif)
-		print(lista_gifs)
 		return lista_gifs
 
 	def eliminarLlaves(self):
