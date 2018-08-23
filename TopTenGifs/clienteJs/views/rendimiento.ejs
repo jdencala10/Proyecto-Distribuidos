@@ -1,0 +1,63 @@
+
+<html>
+<head>
+        <title>PSD</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <meta charset="utf-8">
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <script>
+                
+        </script>
+</head>
+<body>
+<div class="page-header">
+  <h1 style="margin-left: 10px"> Pruebas de Rendimiento </h1>
+</div>
+<div class="container">
+
+<div class="row">
+   <div id="myDiv"></div>
+</div>
+
+</div>
+<script>
+
+var y0=[],y1=[]
+
+<% for(var j=0; j < cache.length; j++ ){ %>
+  y0.push( <%= cache[j] %>);
+<% } %>
+
+<% for(var j=0; j < MySQL.length; j++ ){ %>
+  y1.push( <%= MySQL[j] %>);
+<% } %>
+
+
+var trace1 = {
+  x: y0,
+  type: 'box',
+  name: 'MySQL + Cache'
+};
+
+var trace2 = {
+  x: y1,
+  type: 'box',
+  name: 'Solo MySQL'
+};
+
+var layout = {
+	title: 'Comparación de Request Time'
+};
+
+var data = [trace1, trace2];
+
+Plotly.newPlot('myDiv', data, layout);
+
+</script>
+
+
+</body>
+</html>

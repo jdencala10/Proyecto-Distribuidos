@@ -78,6 +78,7 @@ class theGifServerHandler:
 				elGif = Gif()
 				for e in y.split(", "):
 					gi = e.split("=")
+					print(gi)
 					if(gi[0] == 'url'):
 						elGif.url = gi[1][1:-1]
 					elif(gi[0] == 'contador'):
